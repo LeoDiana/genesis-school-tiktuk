@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 
 import {
-  Avatar,
   Card,
   CardContent,
-  CardHeader,
   Chip,
   Grid,
   Typography,
@@ -15,6 +13,7 @@ import CommentIcon from '@mui/icons-material/Comment';
 import ReactPlayer from 'react-player';
 import { PostProp } from './types';
 import { shortenNumber } from '../../common/utils';
+import UserHeader from '../User/UserHeader';
 
 const Post = (postData: PostProp) => {
   const {
@@ -30,24 +29,7 @@ const Post = (postData: PostProp) => {
 
   return (
     <Card sx={{ maxWidth: 500 }}>
-      <CardHeader
-        avatar={(
-          <Avatar
-            alt={authorMeta.name}
-            src={authorMeta.avatar}
-          />
-          )}
-        title={(
-          <Typography align="left" fontWeight={600}>
-            {authorMeta.name}
-          </Typography>
-          )}
-        subheader={(
-          <Typography align="left">
-            {text}
-          </Typography>
-          )}
-      />
+      <UserHeader avatar={authorMeta.avatar} username={authorMeta.name} title={text} />
       <CardContent>
         <Grid container spacing={2}>
           <Grid container item justifyContent="center">
