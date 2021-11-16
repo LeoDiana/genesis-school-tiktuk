@@ -7,7 +7,7 @@ import { PostProp } from '../components/Post/types';
 import { FeedProp } from './types';
 
 const Feed = ({ postsPerPage, postsCount }:FeedProp) => {
-  const [posts, setPosts] = useState([] as PostProp[]);
+  const [posts, setPosts] = useState<PostProp[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
