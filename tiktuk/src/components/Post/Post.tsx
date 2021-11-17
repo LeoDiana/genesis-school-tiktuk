@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 
 import {
@@ -11,6 +12,7 @@ import {
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import ReactPlayer from 'react-player';
+import InView, { useInView } from 'react-intersection-observer';
 import { PostProp } from './types';
 import { shortenNumber } from '../../common/utils';
 import UserHeader from '../User/UserHeader';
@@ -26,58 +28,64 @@ const Post = (postData: PostProp) => {
     playing,
     videoId,
     onClick,
+    inView,
   } = postData;
 
+  const { ref } = useInView({
+    threshold: 1,
+  });
+
   return (
-    <Card sx={{ maxWidth: 500 }}>
-      <UserHeader avatar={authorMeta.avatar} username={authorMeta.name} title={text} />
-      <CardContent>
-        <Grid container spacing={2}>
-          <Grid container item justifyContent="center">
-            <ReactPlayer
-              url={videoUrl}
-              playing={playing}
-              loop
-              height={400}
-              width={250}
-              onClick={() => { onClick(videoId); }}
-              // controls
-            />
-          </Grid>
-          <Grid item container spacing={2}>
-            <Grid
-              item
-              container
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            >
-              <Grid item container xs="auto">
-                <FavoriteIcon />
-                <Typography>{shortenNumber(diggCount)}</Typography>
-              </Grid>
-              <Grid item container xs="auto">
-                <CommentIcon />
-                <Typography>{shortenNumber(commentCount)}</Typography>
-              </Grid>
+    <InView threshold={0.8} as="div" onChange={(isInView, entry) => { if (isInView) { inView(videoId); } }}>
+      <Card sx={{ maxWidth: 500 }} ref={ref}>
+        <UserHeader avatar={authorMeta.avatar} username={authorMeta.name} title={text} />
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid container item justifyContent="center">
+              <ReactPlayer
+                url={videoUrl}
+                playing={playing}
+                loop
+                height={400}
+                width={250}
+                onClick={() => { onClick(videoId); }}
+              />
             </Grid>
-            <Grid
-              item
-              container
-              direction="row"
-              justifyContent="center"
-              spacing={1}
-            >
-              {hashtags.length > 0 && hashtags.map((hashtag) => (
-                <Grid item>
-                  <Chip variant="outlined" size="small" label={`#${hashtag.name}`} />
+            <Grid item container spacing={2}>
+              <Grid
+                item
+                container
+                direction="row"
+                spacing={2}
+                justifyContent="center"
+              >
+                <Grid item container xs="auto">
+                  <FavoriteIcon />
+                  <Typography>{shortenNumber(diggCount)}</Typography>
                 </Grid>
-              ))}
+                <Grid item container xs="auto">
+                  <CommentIcon />
+                  <Typography>{shortenNumber(commentCount)}</Typography>
+                </Grid>
+              </Grid>
+              <Grid
+                item
+                container
+                direction="row"
+                justifyContent="center"
+                spacing={1}
+              >
+                {hashtags.length > 0 && hashtags.map((hashtag) => (
+                  <Grid item>
+                    <Chip variant="outlined" size="small" label={`#${hashtag.name}`} />
+                  </Grid>
+                ))}
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </InView>
   );
 };
 

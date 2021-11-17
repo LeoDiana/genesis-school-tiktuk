@@ -16,15 +16,17 @@ const Feed = ({ postsPerPage, postsCount }: FeedProp) => {
       const response = await getTrendingFeed();
       setPosts(response);
       setPlayingVideo(response[0].id);
-      console.log(response[0].id);
     };
 
     getFeed();
   }, []);
 
   const onVideoClick = (id: string) => {
-    console.log(id);
     setPlayingVideo((currId) => (currId === id ? '' : id));
+  };
+
+  const videoinView = (id: string) => {
+    setPlayingVideo(id);
   };
 
   return (
@@ -38,6 +40,7 @@ const Feed = ({ postsPerPage, postsCount }: FeedProp) => {
                 <Post
                   {...post}
                   onClick={onVideoClick}
+                  inView={videoinView}
                   playing={!!(playingVideo === post.id)}
                   videoId={post.id}
                 />
