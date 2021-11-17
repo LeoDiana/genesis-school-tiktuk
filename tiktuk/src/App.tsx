@@ -1,28 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter, Route, Routes,
+} from 'react-router-dom';
 import './App.css';
+import ErrorHandler from './components/ErrorHandler/ErrorHandler';
+import Navbar from './components/NavBar/NavBar';
+import Feed from './pages/Feed';
+import UserPage from './pages/UserPage';
 
 const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit
-        {' '}
-        <code>src/App.tsx</code>
-        {' '}
-        and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
+  <BrowserRouter>
+    <Navbar />
+    <ErrorHandler />
+    <Routes>
+      <Route path="/" element={<Feed postsPerPage={10} postsCount={30} />} />
+      <Route path="/user/:username" element={<UserPage />} />
+    </Routes>
+  </BrowserRouter>
 );
 
 export default App;
