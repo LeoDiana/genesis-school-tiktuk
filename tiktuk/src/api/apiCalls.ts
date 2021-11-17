@@ -46,7 +46,7 @@ const getUserInfoAPI = async (username: string): Promise<UserInfoResponse> => {
 };
 
 export const getTrendingFeed = async (): Promise<TrendingFeedItem[]> => (
-  !GET_DATA_FROM_API ? getTrendingFeedAPI() : posts
+  GET_DATA_FROM_API ? getTrendingFeedAPI() : posts
 );
 
 export const getUserFeed = async (
