@@ -50,13 +50,13 @@ export const getTrendingFeed = async (): Promise<TrendingFeedItem[]> => (
 );
 
 export const getUserFeed = async (
-  username = 'oleg_sheff',
+  username:string,
 ): Promise<UserFeedItem[]> => (
   GET_DATA_FROM_API ? getUserFeedAPI(username) : userFeed.itemList
 );
 
 export const getUserInfo = async (
-  username = 'oleg_sheff',
+  username:string,
 ): Promise<UserInfoResponse> => (
   GET_DATA_FROM_API ? getUserInfoAPI(username) : userInfo
 );
