@@ -16,6 +16,7 @@ import InView, { useInView } from 'react-intersection-observer';
 import { shortenNumber } from '../../common/utils';
 import UserHeader from '../User/UserHeader';
 import { AuthorMeta, Hashtag } from '../../common/types';
+import Preloader from '../Preloader/Preloader';
 
 interface PostProp {
   id: string;
@@ -58,14 +59,17 @@ const Post = (postData: PostProp) => {
         <CardContent>
           <Grid container spacing={2}>
             <Grid container item justifyContent="center">
-              <ReactPlayer
-                url={videoUrl}
-                playing={playing}
-                loop
-                height={400}
-                width={250}
-                onClick={() => { onClick(videoId); }}
-              />
+              { !videoUrl ? <Preloader />
+                : (
+                  <ReactPlayer
+                    url={videoUrl}
+                    playing={playing}
+                    loop
+                    height={400}
+                    width={250}
+                    onClick={() => { onClick(videoId); }}
+                  />
+                )}
             </Grid>
             <Grid item container spacing={2}>
               <Grid

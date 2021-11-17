@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player';
 import { Grid, Typography } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { shortenNumber } from '../../common/utils';
+import Preloader from '../Preloader/Preloader';
 
 interface UserFeedElementProps {
     videoUrl: string,
@@ -21,14 +22,17 @@ const UserFeedElement = ({
       <PlayArrowIcon />
       <Typography>{shortenNumber(playCount)}</Typography>
     </Grid>
-    <ReactPlayer
-      url={videoUrl}
-      playing={playing}
-      loop
-      height={300}
-      width={175}
-      onClick={() => { onClick(videoId); }}
-    />
+    {!videoUrl ? <Preloader />
+      : (
+        <ReactPlayer
+          url={videoUrl}
+          playing={playing}
+          loop
+          height={300}
+          width={175}
+          onClick={() => { onClick(videoId); }}
+        />
+      )}
   </Grid>
 );
 
