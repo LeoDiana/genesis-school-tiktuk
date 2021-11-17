@@ -71,16 +71,16 @@ const UserInfo = (props : UserInfoProps) => {
         )}
       />
       <CardContent>
-        <Grid container spacing={3} justifyContent="center">
-          <Grid item xs="auto">
+        <Grid container justifyContent="space-around">
+          <Grid item xs={4} alignItems="center" container direction="column">
             <Typography fontWeight={600}>{shortenNumber(userInfo.followingCount)}</Typography>
             <Typography>Following</Typography>
           </Grid>
-          <Grid item xs="auto">
+          <Grid item xs={4} alignItems="center" container direction="column">
             <Typography fontWeight={600}>{shortenNumber(userInfo.followerCount)}</Typography>
             <Typography>Followers</Typography>
           </Grid>
-          <Grid item xs="auto">
+          <Grid item xs={4} alignItems="center" container direction="column">
             <Typography fontWeight={600}>{shortenNumber(userInfo.heartCount)}</Typography>
             <Typography>Likes</Typography>
           </Grid>
