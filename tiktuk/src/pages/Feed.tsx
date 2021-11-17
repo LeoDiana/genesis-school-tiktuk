@@ -36,7 +36,7 @@ const Feed = ({ postsPerPage, postsCount }: FeedProp) => {
           posts
             .slice(postsPerPage * (currentPage - 1), postsPerPage * currentPage)
             .map((post) => (
-              <Grid item>
+              <Grid item key={post.id}>
                 <Post
                   {...post}
                   onClick={onVideoClick}

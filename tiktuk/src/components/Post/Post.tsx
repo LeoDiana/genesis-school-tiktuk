@@ -76,7 +76,7 @@ const Post = (postData: PostProp) => {
                 spacing={1}
               >
                 {hashtags.length > 0 && hashtags.map((hashtag) => (
-                  <Grid item>
+                  <Grid item key={hashtag.name}>
                     <Chip variant="outlined" size="small" label={`#${hashtag.name}`} />
                   </Grid>
                 ))}
