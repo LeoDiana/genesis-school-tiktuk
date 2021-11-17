@@ -3,8 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Pagination, Grid } from '@mui/material';
 import Post from '../components/Post/Post';
 import { getTrendingFeed } from '../api/apiCalls';
-import { FeedProp } from './types';
 import { TrendingFeedItem } from '../common/types';
+
+interface FeedProp {
+  postsPerPage: number,
+  postsCount: number
+}
 
 const Feed = ({ postsPerPage, postsCount }: FeedProp) => {
   const [posts, setPosts] = useState<TrendingFeedItem[]>([]);

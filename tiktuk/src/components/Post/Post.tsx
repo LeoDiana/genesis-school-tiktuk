@@ -13,9 +13,25 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import ReactPlayer from 'react-player';
 import InView, { useInView } from 'react-intersection-observer';
-import { PostProp } from './types';
 import { shortenNumber } from '../../common/utils';
 import UserHeader from '../User/UserHeader';
+import { AuthorMeta, Hashtag } from '../../common/types';
+
+interface PostProp {
+  id: string;
+  text: string;
+  authorMeta: AuthorMeta;
+  videoUrl: string;
+  diggCount: number;
+  commentCount: number;
+  hashtags: Hashtag[];
+  playing: boolean;
+  // eslint-disable-next-line no-unused-vars
+  onClick: (videoId: string)=>void;
+  // eslint-disable-next-line no-unused-vars
+  inView: (videoId: string)=>void;
+  [others: string]: any;
+}
 
 const Post = (postData: PostProp) => {
   const {
