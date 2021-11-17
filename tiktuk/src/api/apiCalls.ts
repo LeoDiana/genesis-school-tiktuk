@@ -1,75 +1,52 @@
 /* eslint-disable import/no-named-default */
-import axios, { Method } from 'axios';
 import {
   TrendingFeedItem,
   UserInfoResponse,
   UserFeedItem,
 } from '../common/types';
+
 import { default as posts } from './getTrendingFeed.json';
 import { default as userInfo } from './userInfo.json';
 import { default as userFeed } from './userFeed.json';
+import { instance as axios } from './axiosConfig';
 
 const GET_DATA_FROM_API = false;
 
 const getTrendingFeedAPI = async (): Promise<TrendingFeedItem[]> => {
-  const options = {
-    method: 'GET' as Method,
-    url: 'https://tiktok33.p.rapidapi.com/trending/feed',
-    headers: {
-      'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-      'x-rapidapi-key': process.env.REACT_APP_API_KEY as string,
-    },
-  };
-
-  axios
-    .request(options)
-    .then((response) => response.data)
-    .catch((error) => {
-      console.error(error);
-    });
-  return [];
+  try {
+    const response = await axios.get('/trending/feed');
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 const getUserFeedAPI = async (username: string): Promise<UserFeedItem[]> => {
-  const options = {
-    method: 'GET' as Method,
-    url: `https://tiktok33.p.rapidapi.com/user/feed/${username}`,
-    headers: {
-      'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-      'x-rapidapi-key': process.env.REACT_APP_API_KEY as string,
-    },
-  };
-
-  axios
-    .request(options)
-    .then((response) => response.data.itemList)
-    .catch((error) => {
-      console.error(error);
-    });
-  return [];
+  try {
+    const response = await axios.get(`/user/feed/${username}`);
+    console.log(response.data.itemList);
+    return response.data.itemList;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 const getUserInfoAPI = async (username: string): Promise<UserInfoResponse> => {
-  const options = {
-    method: 'GET' as Method,
-    url: `https://tiktok33.p.rapidapi.com/user/info/${username}`,
-    headers: {
-      'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-      'x-rapidapi-key': process.env.REACT_APP_API_KEY as string,
-    },
-  };
-
-  axios
-    .request(options)
-    .then((response) => response.data)
-    .catch((error) => {
-      console.error(error);
-    });
-  return {} as UserInfoResponse;
+  try {
+    const response = await axios.get(`/user/info/${username}`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return {} as UserInfoResponse;
+  }
 };
 
 export const getTrendingFeed = async (): Promise<TrendingFeedItem[]> => (
-  GET_DATA_FROM_API ? getTrendingFeedAPI() : posts
+  !GET_DATA_FROM_API ? getTrendingFeedAPI() : posts
 );
 
 export const getUserFeed = async (
