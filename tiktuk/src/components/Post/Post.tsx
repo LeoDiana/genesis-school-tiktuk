@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
   Card,
@@ -23,9 +23,10 @@ const Post = (postData: PostProp) => {
     diggCount,
     commentCount,
     hashtags,
+    playing,
+    videoId,
+    onClick,
   } = postData;
-
-  const [playing, setPlaying] = useState(true);
 
   return (
     <Card sx={{ maxWidth: 500 }}>
@@ -39,8 +40,8 @@ const Post = (postData: PostProp) => {
               loop
               height={400}
               width={250}
-              onClick={() => { setPlaying((p) => !p); }}
-              controls
+              onClick={() => { onClick(videoId); }}
+              // controls
             />
           </Grid>
           <Grid item container spacing={2}>
