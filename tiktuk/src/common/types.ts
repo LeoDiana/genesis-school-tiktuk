@@ -1,3 +1,5 @@
+// types generated from response
+
 export interface TrendingFeedItem {
     id: string;
     secretID: string;
