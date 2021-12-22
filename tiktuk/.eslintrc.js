@@ -18,6 +18,11 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
+    'more',
+    'unicorn',
+    'promise',
+    'regexp',
+    'import',
   ],
   rules: {
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
